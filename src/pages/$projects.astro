@@ -1,0 +1,49 @@
+---
+import MainHead from '../components/MainHead.astro';
+import Footer from '../components/Footer/index.jsx';
+import Nav from '../components/Nav/nav.astro';
+import PortfolioPreview from '../components/PortfolioPreview/index.jsx';
+
+let { collection } = Astro.props;
+export async function createCollection() {
+  return {
+    async data() {
+      const projects = Astro.fetchContent('./project/**/*.md');
+      projects.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+      return projects.filter(({ published_at }) => !!published_at);
+    }
+  }
+}
+---
+
+<html lang="en">
+  <head>
+    <MainHead title="All Projects | Gabriel Fleury" />
+    <style lang="scss">
+      .grid {
+        display: grid;
+        grid-gap: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <Nav />
+    <div class="wrapper">
+      <h1 class="title mt4 mb4">Projetos</h1>
+      <div class="grid-projects">
+        {collection.data.map((project) => (
+          <PortfolioPreview project={project} />
+        ))}
+      </div>
+    </div>
+    <Footer />
+  </body>
+</html>
+
+<style lang="scss">
+  .grid-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+</style>
