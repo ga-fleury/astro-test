@@ -4,6 +4,7 @@ title: Selo Coletivo
 client: Self
 published_at: 2021-03-04 00:00:00
 img: https://images.unsplash.com/photo-1547234935-80c7145ec969?fit=crop&w=1400&h=700&q=75
+imgalt: uma bela descriptione
 description: |
   We took some cool pictures of the moon and made a website about it.
 tags:
